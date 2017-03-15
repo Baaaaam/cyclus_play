@@ -81,6 +81,15 @@
             </Sink>
         </config>
     </prototype>
+    <prototype>
+        <name>sink_du</name>
+        <config>
+            <Sink>
+                <in_commods><val>DU</val></in_commods>
+                <capacity>1e100</capacity>
+            </Sink>
+        </config>
+    </prototype>
 
     <prototype>
         <name>deployer_PWR_CHAIN</name>
@@ -90,6 +99,7 @@
                     <val>u_nat</val>
                     <val>enrich</val>
                     <val>sink</val>
+                    <val>sink_du</val>
                     <val>LWR</val>
                 </prototypes>
 
@@ -98,9 +108,11 @@
                     <val>1</val>
                     <val>1</val>
                     <val>1</val>
+                    <val>1</val>
                 </build_times>
 
                 <n_build>
+                    <val>1</val>
                     <val>1</val>
                     <val>1</val>
                     <val>1</val>
