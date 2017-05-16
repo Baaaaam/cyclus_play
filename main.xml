@@ -2,14 +2,17 @@
 
     <schematype>flat</schematype>
     <control>
-        <duration>1200</duration>
+        <duration>800</duration>
+        <!--<duration>2400</duration>-->
         <startmonth>1</startmonth>
         <startyear>2015</startyear>
         <decay>never</decay>
+        <explicit_inventory>true</explicit_inventory>
     </control>
 
     <archetypes>
         <spec> <lib>cycamore</lib> <name>Source</name></spec>
+        <spec> <lib>cycamore</lib> <name>GroupInst</name></spec>
         <spec> <lib>cycamore</lib> <name>DeployInst</name></spec>
         <spec> <lib>cycamore</lib> <name>Sink</name></spec>
         <spec> <lib>cycamore</lib> <name>Enrichment</name> </spec>
@@ -18,19 +21,21 @@
         <spec> <lib>cycamore</lib> <name>FuelFab</name> </spec>
         <spec> <lib>cycamore</lib> <name>Separations</name> </spec>
         <spec> <lib>cycamore</lib> <name>Mixer</name> </spec>
+        <spec><lib>cyclass</lib><name>Reactor</name><alias>cyclassReactor</alias></spec>
+        <spec><lib>cyclass</lib><name>FuelFab</name><alias>cyclassFuelFab</alias></spec>
     </archetypes>
 
 
     <xi:include href="recipe.xml" xpointer="xpointer(//My_include/*)"/>
-    <xi:include href="LWR-cycle.xml" xpointer="xpointer(//My_include/*)"/>
-
+    <xi:include href="reactor.xml" xpointer="xpointer(//My_include/*)"/>
 
     <prototype>
-        <name>PWR_MOX_source</name>
+        <name>nu_src</name>
         <config>
             <Source>
-                <outcommod>PWR_MOX_new</outcommod>
-                <outrecipe>PWR_MOX_new</outrecipe>
+                <outcommod>nu</outcommod>
+                <outrecipe>nu</outrecipe>
+
                 <inventory_size>1e100</inventory_size>
                 <throughput>1e100</throughput>
             </Source>
@@ -38,29 +43,16 @@
     </prototype>
 
     <prototype>
-        <name>PWR_UOX_source</name>
+        <name>leu_src</name>
         <config>
             <Source>
-                <outcommod>PWR_UOX_new</outcommod>
-                <outrecipe>PWR_UOX_new</outrecipe>
+                <outcommod>FBR_LEU_N</outcommod>
+                <outrecipe>FBR_LEU_N</outrecipe>
                 <inventory_size>1e100</inventory_size>
                 <throughput>1e100</throughput>
             </Source>
         </config>
     </prototype>
-
-
-    <prototype>
-        <name>E3_second_limited_storage</name>
-        <config>
-            <Storage>
-                <in_commods> <val>E3_second</val></in_commods>
-                <out_commods> <val>E3_second_stored</val></out_commods>
-                <residence_time>0</residence_time>
-            </Storage>
-        </config>
-    </prototype>
-
 
 
     <prototype>
@@ -73,27 +65,109 @@
         </config>
     </prototype>
 
+
     <prototype>
-        <name>deployer_PWR_CHAIN</name>
+        <name>deployer_main_CHAIN</name>
         <config>
             <DeployInst>
                 <prototypes>
                     <val>waste</val>
-                    <val>PWR_MOX_source</val>
-                    <val>E3_second_limited_storage</val>
-                    <val>PWR_UOX_source</val>
+                    <val>nu_src</val>
+                    <val>leu_src</val>
 
-                    <val>PWR_cooling</val>
-                    <val>PWR_storage</val>
-                    <val>PWR_separation</val>
+                    <val>Storage_ru</val>
+                    <val>Storage_blk_tru</val>
+                    <val>Storage_drv_tru</val>
 
-                    <val>J1_second_storage</val>
-                    <val>J1_prime_storage</val>
+                    <val>COOL</val>
+                    <val>SEP</val>
+                    <val>FAB</val>
 
-                    <val>PWR_storage_fp</val>
-                    <val>PWR_storage_ma</val>
+                    <val>FBR_blanket_cooling</val>
+                    <val>FBR_blanket_separation</val>
+                </prototypes>
 
-                    <val>PWR</val>
+                <build_times>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+
+                    <val>1</val>
+                    <val>1</val>
+                </build_times>
+
+                <n_build>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+
+                    <val>1</val>
+                    <val>1</val>
+                    <val>300</val>
+
+                    <val>1</val>
+                    <val>1</val>
+                </n_build>
+            </DeployInst>
+        </config>
+    </prototype>
+
+    <agent> <name>deployer_1</name> <prototype>deployer_main_CHAIN</prototype> </agent>
+
+
+    <prototype>
+        <name>deployer_FBR_init_CHAIN</name>
+        <config>
+            <DeployInst>
+                <prototypes>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_out_blanket</val>
+                    <val>FBR_out_blanket</val>
+                    <val>FBR_out_blanket</val>
+                    <val>FBR_out_blanket</val>
+                    <val>FBR_out_blanket</val>
+                    <val>FBR_out_blanket</val>
+                    <val>FBR_out_blanket</val>
+                    <val>FBR_out_blanket</val>
+                    <val>FBR_out_blanket</val>
+                    <val>FBR_out_blanket</val>
+                    <val>FBR_out_blanket</val>
+                    <val>FBR_out_blanket</val>
+                    <val>FBR_out_blanket</val>
+                    <val>FBR_out_blanket</val>
+                    <val>FBR_out_blanket</val>
+                    <val>FBR_out_blanket</val>
+                    <val>FBR_out_blanket</val>
+                    <val>FBR_out_blanket</val>
                 </prototypes>
 
                 <build_times>
@@ -109,29 +183,338 @@
                     <val>1</val>
                     <val>1</val>
                     <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
                 </build_times>
 
+                <lifetimes>
+                    <val>181</val>
+                    <val>205</val>
+                    <val>229</val>
+                    <val>253</val>
+                    <val>277</val>
+                    <val>301</val>
+                    <val>325</val>
+                    <val>349</val>
+                    <val>373</val>
+                    <val>397</val>
+                    <val>421</val>
+                    <val>445</val>
+                    <val>469</val>
+                    <val>493</val>
+                    <val>517</val>
+                    <val>541</val>
+                    <val>577</val>
+                    <val>589</val>
+                    <val>181</val>
+                    <val>205</val>
+                    <val>229</val>
+                    <val>253</val>
+                    <val>277</val>
+                    <val>301</val>
+                    <val>325</val>
+                    <val>349</val>
+                    <val>373</val>
+                    <val>397</val>
+                    <val>421</val>
+                    <val>445</val>
+                    <val>469</val>
+                    <val>493</val>
+                    <val>517</val>
+                    <val>541</val>
+                    <val>577</val>
+                    <val>589</val>
+                </lifetimes>
+
                 <n_build>
-                    <val>1</val>
-                    <val>1</val>
-                    <val>1</val>
-                    <val>1</val>
-                    <val>1</val>
-                    <val>1</val>
-                    <val>1</val>
-                    <val>1</val>
-                    <val>1</val>
-                    <val>1</val>
-                    <val>1</val>
-                    <val>1</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
                 </n_build>
             </DeployInst>
         </config>
     </prototype>
 
+    <prototype>
+        <name>FBR_plant</name>
+        <config>
+            <GroupInst>
+                <prototypes>
+                    <val>FBR_in_blanket</val>
+                    <val>FBR_out_blanket</val>
+                </prototypes>
+            </GroupInst>
+        </config>
+    </prototype>
 
-    <agent> <name>deployer</name> <prototype>deployer_PWR_CHAIN</prototype> </agent>
+    <agent> <name>deployer_3</name> <prototype>deployer_FBR_init_CHAIN</prototype> </agent>
 
+    <prototype>
+        <name>deployer_FBR_CHAIN</name>
+        <config>
+            <DeployInst>
+                <prototypes>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                </prototypes>
 
+                <build_times>
+                    <val>181</val>
+                    <val>205</val>
+                    <val>229</val>
+                    <val>253</val>
+                    <val>277</val>
+                    <val>301</val>
+                    <val>325</val>
+                    <val>349</val>
+                    <val>373</val>
+                    <val>397</val>
+                    <val>421</val>
+                    <val>445</val>
+                    <val>469</val>
+                    <val>493</val>
+                    <val>517</val>
+                    <val>541</val>
+                    <val>577</val>
+                    <val>589</val>
+                </build_times>
+
+                <n_build>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>4</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                </n_build>
+            </DeployInst>
+        </config>
+    </prototype>
+    <agent> <name>deployer_3b</name> <prototype>deployer_FBR_CHAIN</prototype> </agent>
+
+    <prototype>
+        <name>deployer_FBR_CHAIN_2</name>
+        <config>
+            <DeployInst>
+                <prototypes>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                </prototypes>
+
+                <build_times>
+                    <val>901</val>
+                    <val>925</val>
+                    <val>949</val>
+                    <val>973</val>
+                    <val>997</val>
+                    <val>1021</val>
+                    <val>1045</val>
+                    <val>1069</val>
+                    <val>1093</val>
+                    <val>1117</val>
+                    <val>1141</val>
+                    <val>1165</val>
+                    <val>1189</val>
+                    <val>1213</val>
+                    <val>1237</val>
+                    <val>1261</val>
+                    <val>1285</val>
+                    <val>1309</val>
+                </build_times>
+
+                <n_build>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>4</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                </n_build>
+            </DeployInst>
+        </config>
+    </prototype>
+    <agent> <name>deployer_3c</name> <prototype>deployer_FBR_CHAIN_2</prototype> </agent>
+
+    <prototype>
+        <name>deployer_FBR_CHAIN_3</name>
+        <config>
+            <DeployInst>
+                <prototypes>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                    <val>FBR_plant</val>
+                </prototypes>
+
+                <build_times>
+                    <val>1621</val>
+                    <val>1645</val>
+                    <val>1669</val>
+                    <val>1693</val>
+                    <val>1717</val>
+                    <val>1741</val>
+                    <val>1765</val>
+                    <val>1789</val>
+                    <val>1813</val>
+                    <val>1837</val>
+                    <val>1861</val>
+                    <val>1885</val>
+                    <val>1909</val>
+                    <val>1933</val>
+                    <val>1957</val>
+                    <val>1981</val>
+                    <val>2005</val>
+                    <val>2029</val>
+                </build_times>
+
+                <n_build>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>4</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                    <val>6</val>
+                </n_build>
+            </DeployInst>
+        </config>
+    </prototype>
+    <agent> <name>deployer_3d</name> <prototype>deployer_FBR_CHAIN_3</prototype> </agent>
 
 </simulation>
