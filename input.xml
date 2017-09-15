@@ -1,352 +1,171 @@
-<simulation>
-	<control>
-		<duration>1200</duration>
-		<startmonth>1</startmonth>
-		<startyear>0</startyear>
-		<explicit_inventory>true</explicit_inventory>
-	</control>
-	
-	<archetypes>
-		<spec> <lib>cycamore</lib> <name>GrowthRegion</name></spec>
-		<spec> <lib>cycamore</lib> <name>DeployInst</name></spec>
-		<spec> <lib>cycamore</lib> <name>ManagerInst</name></spec>
-		<spec> <lib>cycamore</lib> <name>Source</name></spec>
-		<spec> <lib>cycamore</lib> <name>Reactor</name></spec>
-		<spec> <lib>cycamore</lib> <name>FuelFab</name></spec>
-		<spec> <lib>cycamore</lib> <name>Sink</name></spec>
-		<spec> <lib>cycamore</lib> <name>Storage</name></spec>
-		<spec> <lib>cycamore</lib> <name>Separations</name></spec>
-	</archetypes>
-	
-	<recipe> <!--NatU-->
-		<name>NatU</name>
-		<basis>mass</basis>
-		<nuclide> <id>U235</id> <comp>0.711</comp></nuclide>
-		<nuclide> <id>U238</id> <comp>99.289</comp></nuclide>
-	</recipe>
-	
-	<recipe> <!--StartPu-->
-		<name>StartPu</name>
-		<basis>mass</basis>
-		<nuclide> <id>Pu239</id> <comp>5.833</comp></nuclide>
-		<nuclide> <id>Pu240</id> <comp>2.686</comp></nuclide>
-		<!--<nuclide> <id>Pu241</id> <comp>1.629</comp></nuclide>-->
-		<nuclide> <id>Pu242</id> <comp>0.7640</comp></nuclide>
-	</recipe>
-	
-	<recipe> <!--FastFD-->
-		<name>FastFD</name>
-		<basis>mass</basis>
-		<nuclide> <id>U234</id> <comp>26.82</comp></nuclide>
-		<nuclide> <id>U235</id> <comp>1430</comp></nuclide>
-		<nuclide> <id>U236</id> <comp>126</comp></nuclide>
-		<nuclide> <id>U238</id> <comp>927900</comp></nuclide>
-		<nuclide> <id>Pu238</id> <comp>180</comp></nuclide>
-		<nuclide> <id>Pu239</id> <comp>48400</comp></nuclide>
-		<nuclide> <id>Pu240</id> <comp>18700</comp></nuclide>
-		<!--<nuclide> <id>Pu241</id> <comp>2040</comp></nuclide>-->
-		<nuclide> <id>Pu242</id> <comp>1220</comp></nuclide>
-	</recipe>
-	
-	<recipe> <!--Spent_FastFD-->
-		<name>Spent_FastFD</name>
-		<basis>mass</basis>
-		<nuclide> <id>U234</id> <comp>26.82</comp></nuclide>
-		<nuclide> <id>U235</id> <comp>823.5</comp></nuclide>
-		<nuclide> <id>U236</id> <comp>239.2</comp></nuclide>
-		<nuclide> <id>U238</id> <comp>859400</comp></nuclide>
-		<nuclide> <id>Np237</id> <comp>251.2</comp></nuclide>
-		<nuclide> <id>Pu238</id> <comp>187.1</comp></nuclide>
-		<nuclide> <id>Pu239</id> <comp>68150</comp></nuclide>
-		<nuclide> <id>Pu240</id> <comp>19810</comp></nuclide>
-		<nuclide> <id>Pu241</id> <comp>2212</comp></nuclide>
-		<nuclide> <id>Pu242</id> <comp>1221</comp></nuclide>
-		<nuclide> <id>Am241</id> <comp>387.3</comp></nuclide>
-		<nuclide> <id>Am242m</id> <comp>12.60</comp></nuclide>
-		<nuclide> <id>Am243</id> <comp>107.1</comp></nuclide>
-		<nuclide> <id>Cm242</id> <comp>12.91</comp></nuclide>
-		<nuclide> <id>Cm243</id> <comp>0.2892</comp></nuclide>
-		<nuclide> <id>Cm244</id> <comp>16.21</comp></nuclide>
-		<nuclide> <id>Cm245</id> <comp>1.101</comp></nuclide>
-		<nuclide> <id>Cm246</id> <comp>0.02832</comp></nuclide>
-		
-		<nuclide> <id>Cs137</id> <comp>45941.34</comp></nuclide>
-	</recipe>
-	
-	<recipe> <!--RU-->
-		<name>RU</name>
-		<basis>mass</basis>
-		<nuclide> <id>U234</id> <comp>0.003</comp></nuclide>
-		<nuclide> <id>U235</id> <comp>0.096</comp></nuclide>
-		<nuclide> <id>U236</id> <comp>0.028</comp></nuclide>
-		<nuclide> <id>U238</id> <comp>99.873</comp></nuclide>
-	</recipe>
-	
-	<recipe> <!--Spent_FastFB-->
-		<name>Spent_FastFB</name>
-		<basis>mass</basis>
-		<nuclide> <id>U235</id> <comp>0.01</comp></nuclide>
-		<nuclide> <id>U238</id> <comp>4.99</comp></nuclide>
-		<nuclide> <id>Pu238</id> <comp>0.076</comp></nuclide>
-		<nuclide> <id>Pu239</id> <comp>89.5755</comp></nuclide>
-		<nuclide> <id>Pu240</id> <comp>5.0445</comp></nuclide>
-		<nuclide> <id>Pu241</id> <comp>0.228</comp></nuclide>
-		<nuclide> <id>Pu242</id> <comp>0.0855</comp></nuclide>
-	</recipe>
-	
-	<facility> <!--U_source-->
-		<name>U_source</name>
-		<config>
-			<Source>
-				<outcommod>NatU</outcommod>
-				<outrecipe>NatU</outrecipe>
-			</Source>
-		</config>
-	</facility>
-	
-	<facility> <!--Pu_source-->
-		<name>Pu_source</name>
-		<config>
-			<Source>
-				<outcommod>StartPu</outcommod>
-				<outrecipe>StartPu</outrecipe>
-				<inventory_size>1.5E6</inventory_size>
-			</Source>
-		</config>
-	</facility>
-	
-	<facility> <!--repo-->
-		<name>repo</name>
-		<config>
-			<Sink>
-				<in_commods>
-					<val>waste</val>
-					<val>Ewaste></val>
-					<val>power</val>
-				</in_commods>
-			</Sink>
-		</config>
-	</facility>
-	
-	<facility> <!--FBRB reactor blanket-->
-		<name>FBRB</name>
-		<lifetime>720</lifetime>
-		<config>
-			<Reactor>
-				<fuel_incommods> <val>RU</val> <val>NatU</val></fuel_incommods>
-				<fuel_inrecipes> <val>RU</val> <val>NatU</val></fuel_inrecipes>
-				<fuel_prefs> <val>2</val> <val>1</val></fuel_prefs>
-				<fuel_outcommods> <val>Spent_FastFB</val> <val>Spent_FastFB</val>  </fuel_outcommods>
-				<fuel_outrecipes> <val>Spent_FastFB</val> <val>Spent_FastFB</val> </fuel_outrecipes>
-				<cycle_time>47</cycle_time>
-				<refuel_time>0</refuel_time>
-				<assem_size>700</assem_size>
-				<n_assem_core>6</n_assem_core>
-				<n_assem_batch>2</n_assem_batch>
-				<power_cap>18</power_cap>
-				<power_name>power</power_name>
-			</Reactor>
-		</config>
-	</facility>
-	
-	<facility> <!--FBRD reactor driver-->
-		<name>FBRD</name>
-		<lifetime>720</lifetime>
-		<config>
-			<Reactor>
-				<fuel_incommods> <val>FastFD</val> </fuel_incommods>
-				<fuel_inrecipes> <val>FastFD</val> </fuel_inrecipes>
-				<fuel_outcommods> <val>Spent_FastFD</val> </fuel_outcommods>
-				<fuel_outrecipes> <val>Spent_FastFD</val> </fuel_outrecipes>	
-				<cycle_time>18</cycle_time>
-				<refuel_time>0</refuel_time>
-				<assem_size>978.5</assem_size>
-				<n_assem_core>91</n_assem_core>
-				<n_assem_batch>20</n_assem_batch>
-				<power_cap>882</power_cap>
-				<power_name>power</power_name>
-			</Reactor>
-		</config>
-	</facility>
-	
-	<facility> <!--Dstorage-->
-		<name>Dstorage</name>
-		<config>
-			<Storage>
-				<in_commods>
-					<val>Spent_FastFD</val>
-				</in_commods>
-				<out_commods>
-					<val>Spent_FastFD_cool</val>
-				</out_commods>
-				<residence_time>60</residence_time>
-			</Storage>
-		</config>
-	</facility>
-	
-	<facility> <!--Bstorage-->
-		<name>Bstorage</name>
-		<config>
-			<Storage>
-				<in_commods>
-					<val>Spent_FastFB</val>
-				</in_commods>
-				<out_commods>
-					<val>Spent_FastFB_cool</val>
-				</out_commods>
-				<residence_time>60</residence_time>
-			</Storage>
-		</config>
-	</facility>
-	
-	<facility> <!--Seperation-->
-		<name>Seperation</name>
-		<config>
-			<Separations>
-				<feed_commods>
-					<val>Spent_FastFB_cool</val>
-					<val>Spent_FastFD_cool</val>
-				</feed_commods>
-				<feedbuf_size>1.5e99</feedbuf_size>
-				<leftover_commod>waste</leftover_commod>
-				<streams>
-					<item>
-						<commod>Pu</commod>
-						<info>
-							<buf_size>1e99</buf_size>
-							<efficiencies>
-								<item>
-									<comp>Pu</comp>
-									<eff>.99</eff>
-								</item>
-							</efficiencies>
-						</info>
-					</item>
-					<item>
-					<commod>RU</commod>
-						<info>
-							<buf_size>1e99</buf_size>
-							<efficiencies>
-								<item>
-									<comp>U</comp>
-									<eff>0.99</eff>
-								</item>
-							</efficiencies>
-						</info>
-					</item>
-				</streams>
-			</Separations>
-		</config>
-	</facility>
-	
-	<facility> <!--SFRD_Fab-->
-		<name>SFRD_Fab</name>
-		<config>
-			<FuelFab>
-				<fill_commods>
-					<val>NatU</val>
-					<val>RU</val>
-				</fill_commods>
-				<fill_commod_prefs>
-					<val>1</val>
-					<val>2</val>
-				</fill_commod_prefs>
-				<fill_recipe>NatU</fill_recipe>
-				<fill_size>1e99</fill_size>
-				<fiss_commods>
-					<val>StartPu</val>
-					<val>Pu</val>
-				</fiss_commods>
-				<fiss_commod_prefs>
-					<val>1</val>
-					<val>2</val>
-				</fiss_commod_prefs>
-				<fiss_size>1e99</fiss_size>
-				<topup_commod>NatU</topup_commod>
-				<outcommod>FastFD</outcommod>
-				<spectrum>fission_spectrum_ave</spectrum>
-			</FuelFab>
-		</config>
-	</facility>
-	
-	<region>
-		<name>Reg</name>
-		<config>
-			<GrowthRegion>
-				<growth>
-					<item>
-						<commod>power</commod>
-						<piecewise_function>
-							<piece>
-								<start>0</start>
-								<function>
-									<type>linear</type>
-									<params>2 2000</params>
-								</function>
-							</piece>
-						</piecewise_function>
-					</item>
-				</growth>
-			</GrowthRegion>
-		</config>
-		
-		<institution>
-			<name>facilities</name>
-			<initialfacilitylist>
-				<entry>
-					<prototype>repo</prototype>
-					<number>1</number>
-				</entry>
-				<entry>
-					<prototype>U_source</prototype>
-					<number>1</number>
-				</entry>
-				<entry>
-					<prototype>Pu_source</prototype>
-					<number>1</number>
-				</entry>
-				<entry>
-					<prototype>Dstorage</prototype>
-					<number>1</number>
-				</entry>
-				<entry>
-					<prototype>Bstorage</prototype>
-					<number>1</number>
-				</entry>
-				<entry>
-					<prototype>FBRB</prototype>
-					<number>2</number>
-				</entry>
-				<entry>
-					<prototype>FBRD</prototype>
-					<number>2</number>
-				</entry>
-				<entry>
-					<prototype>SFRD_Fab</prototype>
-					<number>1</number>
-				</entry>
-				<entry>
-					<prototype>Seperation</prototype>
-					<number>1</number>
-				</entry>
-			</initialfacilitylist>
-			<config>
-				<ManagerInst>
-					<prototypes>
-						<val>repo</val>
-						<val>U_source</val>
-						<val>Pu_source</val>
-						<val>Seperation</val>
-						<val>SFRD_Fab</val>
-						<val>FBRB</val>
-						<val>FBRD</val>
-						<val>Dstorage</val>
-						<val>Bstorage</val>
-					</prototypes>
-				</ManagerInst>
-			</config>
-		</institution>
-		
-		</region>
-	
+<simulation xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <schematype>flat</schematype>
+    <control>
+        <!--<duration>1800</duration>-->
+        <duration>1200</duration>
+        <startmonth>1</startmonth>
+        <startyear>0</startyear>
+        <decay>lazy</decay>
+        <explicit_inventory>true</explicit_inventory>
+    </control>
+
+    <archetypes>
+        <spec> <lib>cycamore</lib> <name>Source</name></spec>
+        <spec> <lib>cycamore</lib> <name>DeployInst</name></spec>
+        <spec> <lib>cycamore</lib> <name>Sink</name></spec>
+        <spec> <lib>cycamore</lib> <name>Enrichment</name> </spec>
+        <spec> <lib>cycamore</lib> <name>Reactor</name> </spec>
+        <spec> <lib>cycamore</lib> <name>Storage</name> </spec>
+        <spec> <lib>cycamore</lib> <name>FuelFab</name> </spec>
+        <spec> <lib>cycamore</lib> <name>Separations</name> </spec>
+        <spec> <lib>cycamore</lib> <name>Mixer</name> </spec>
+        <spec><lib>cyclass</lib><name>Reactor</name><alias>cyclassReactor</alias></spec>
+    </archetypes>
+
+
+    <recipe>
+        <name>r_uox</name>
+        <basis>mass</basis>
+        <nuclide><id>U235</id>   <comp>0.03</comp> </nuclide>
+        <nuclide><id>U238</id>   <comp>0.97</comp> </nuclide>
+    </recipe>
+
+    <prototype>
+        <name>nu_src</name>
+        <config>
+            <Source>
+                <outcommod>c_uox</outcommod>
+                <outrecipe>r_uox</outrecipe>
+
+                <inventory_size>1e100</inventory_size>
+                <throughput>1e100</throughput>
+            </Source>
+        </config>
+    </prototype>
+
+
+    <prototype>
+        <name>waste</name>
+        <config>
+            <Sink>
+                <in_commods><val>waste</val></in_commods>
+                <capacity>1e100</capacity>
+            </Sink>
+        </config>
+    </prototype>
+
+    <prototype>
+        <name>pwr</name>
+        <lifetime>720</lifetime>
+        <config>
+            <cyclassReactor>
+                <eq_model>MLP_Kinf</eq_model>
+                <eq_command>/tmp/mouginot/opt/CLASS/DATA_BASES/PWR/UOX/EQModel/MLP_KINF/PWR_UOX.xml,/tmp/mouginot/opt/CLASS/DATA_BASES/PWR/UOX/EQModel/MLP_KINF/PWR_UOX.nfo,3,1.034</eq_command>
+
+                <ir_model>RK4</ir_model>
+                <ir_command>none</ir_command>
+
+                <xs_model>XSM_MLP</xs_model>
+                <xs_command>/tmp/mouginot/opt/CLASS/DATA_BASES/PWR/UOX/XSModel/30Wg_FullUOX/,Data_Base_Info.nfo,false</xs_command>
+                <fuel_type>uox</fuel_type>
+                <fuel_incommods>
+                    <val>c_uox</val>
+                </fuel_incommods>
+                <fuel_prefs>
+                    <val>10</val>
+                </fuel_prefs>
+
+                <fuel_outcommods> 
+                    <val>c_uox_spent</val>
+                </fuel_outcommods>
+                <cycle_time>25</cycle_time> <!-- BU/30days *Mcore/batch / P_eff = 50./(30)*88758./3./(3000*0.9) -->
+                <refuel_time>0</refuel_time>
+                <assem_size>90000</assem_size><!-- Core_inv / Core_Ass = 88758 / 3. -->
+                <n_assem_core>1</n_assem_core>
+                <n_assem_batch>1</n_assem_batch>
+                <power>3600</power>
+                <power_cap>3600</power_cap>
+                <burnup>30</burnup>
+
+            </cyclassReactor>
+        </config>
+    </prototype>
+
+    <prototype>
+        <name>storage_uox_spent</name>
+        <config>
+            <Storage>
+                <in_commods>
+                    <val>c_uox_spent</val>
+                </in_commods>
+                <out_commods>
+                    <val>c_uox_spent_stored</val>
+                </out_commods>
+                <residence_time>0</residence_time>
+            </Storage>
+        </config>
+    </prototype>
+
+    <prototype>
+        <name>deployer_main_CHAIN</name>
+        <config>
+            <DeployInst>
+                <prototypes>
+                    <val>waste</val>
+                    <val>nu_src</val>
+                    <val>storage_uox_spent</val>
+                    <val>pwr</val>
+                    <val>pwr</val>
+                    <val>pwr</val>
+                    <val>pwr</val>
+                    <val>pwr</val>
+                    <val>pwr</val>
+                    <val>pwr</val>
+                    <val>pwr</val>
+                    <val>pwr</val>
+                    <val>pwr</val>
+                </prototypes>
+
+                <build_times>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>121</val>
+                    <val>241</val>
+                    <val>361</val>
+                    <val>481</val>
+                    <val>601</val>
+                    <val>721</val>
+                    <val>841</val>
+                    <val>961</val>
+                    <val>1081</val>
+                </build_times>
+
+                <n_build>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                    <val>1</val>
+                </n_build>
+            </DeployInst>
+        </config>
+    </prototype>
+
+
+
+
+    <agent> <name>deployer_1</name> <prototype>deployer_main_CHAIN</prototype> </agent>
+
+
 </simulation>
