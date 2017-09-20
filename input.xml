@@ -61,13 +61,13 @@
         <config>
             <cyclassReactor>
                 <eq_model>MLP_Kinf</eq_model>
-                <eq_command>/tmp/mouginot/opt/CLASS/DATA_BASES/PWR/UOX/EQModel/MLP_KINF/PWR_UOX.xml,/tmp/mouginot/opt/CLASS/DATA_BASES/PWR/UOX/EQModel/MLP_KINF/PWR_UOX.nfo,3,1.034</eq_command>
+                <eq_command>//Users/mouginot/work/app//CLASS/DATA_BASES/PWR/UOX/EQModel/MLP_KINF/PWR_UOX.xml,//Users/mouginot/work/app//CLASS/DATA_BASES/PWR/UOX/EQModel/MLP_KINF/PWR_UOX.nfo,3,1.034</eq_command>
 
                 <ir_model>RK4</ir_model>
                 <ir_command>none</ir_command>
 
                 <xs_model>XSM_MLP</xs_model>
-                <xs_command>/tmp/mouginot/opt/CLASS/DATA_BASES/PWR/UOX/XSModel/30Wg_FullUOX/,Data_Base_Info.nfo,false</xs_command>
+                <xs_command>//Users/mouginot/work/app//CLASS/DATA_BASES/PWR/UOX/XSModel/30Wg_FullUOX/,Data_Base_Info.nfo,false</xs_command>
                 <fuel_type>uox</fuel_type>
                 <fuel_incommods>
                     <val>c_uox</val>
@@ -81,13 +81,13 @@
                 </fuel_outcommods>
                 <cycle_time>25</cycle_time> <!-- BU/30days *Mcore/batch / P_eff = 50./(30)*88758./3./(3000*0.9) -->
                 <refuel_time>0</refuel_time>
-                <assem_size>90000</assem_size><!-- Core_inv / Core_Ass = 88758 / 3. -->
-                <n_assem_core>1</n_assem_core>
-                <n_assem_batch>1</n_assem_batch>
+                
+                <n_batch_core>3</n_batch_core>
+                <batch_size>30000</batch_size>
+                
                 <power>3600</power>
                 <power_cap>3600</power_cap>
                 <burnup>30</burnup>
-
             </cyclassReactor>
         </config>
     </prototype>
@@ -116,15 +116,6 @@
                     <val>nu_src</val>
                     <val>storage_uox_spent</val>
                     <val>pwr</val>
-                    <val>pwr</val>
-                    <val>pwr</val>
-                    <val>pwr</val>
-                    <val>pwr</val>
-                    <val>pwr</val>
-                    <val>pwr</val>
-                    <val>pwr</val>
-                    <val>pwr</val>
-                    <val>pwr</val>
                 </prototypes>
 
                 <build_times>
@@ -132,27 +123,9 @@
                     <val>1</val>
                     <val>1</val>
                     <val>1</val>
-                    <val>121</val>
-                    <val>241</val>
-                    <val>361</val>
-                    <val>481</val>
-                    <val>601</val>
-                    <val>721</val>
-                    <val>841</val>
-                    <val>961</val>
-                    <val>1081</val>
                 </build_times>
 
                 <n_build>
-                    <val>1</val>
-                    <val>1</val>
-                    <val>1</val>
-                    <val>1</val>
-                    <val>1</val>
-                    <val>1</val>
-                    <val>1</val>
-                    <val>1</val>
-                    <val>1</val>
                     <val>1</val>
                     <val>1</val>
                     <val>1</val>
