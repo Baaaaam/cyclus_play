@@ -3,7 +3,7 @@
     <schematype>flat</schematype>
     <control>
         <!--<duration>1800</duration>-->
-        <duration>1200</duration>
+        <duration>100</duration>
         <startmonth>1</startmonth>
         <startyear>0</startyear>
         <decay>lazy</decay>
@@ -25,18 +25,18 @@
 
 
     <recipe>
-        <name>r_uox</name>
+        <name>r_u_nat</name>
         <basis>mass</basis>
-        <nuclide><id>U235</id>   <comp>0.03</comp> </nuclide>
-        <nuclide><id>U238</id>   <comp>0.97</comp> </nuclide>
+        <nuclide><id>U235</id>   <comp>7.11000E-03</comp> </nuclide>
+        <nuclide><id>U238</id>   <comp>9.92890E-01</comp> </nuclide>
     </recipe>
 
     <prototype>
         <name>nu_src</name>
         <config>
             <Source>
-                <outcommod>c_uox</outcommod>
-                <outrecipe>r_uox</outrecipe>
+                <outcommod>c_u_nat</outcommod>
+                <outrecipe>r_u_nat</outrecipe>
 
                 <inventory_size>1e100</inventory_size>
                 <throughput>1e100</throughput>
@@ -54,6 +54,22 @@
             </Sink>
         </config>
     </prototype>
+
+    <prototype>
+        <name>enrichment</name>
+        <config>
+            <Enrichment>
+                <feed_commod>c_u_nat</feed_commod>
+                <feed_recipe>r_u_nat</feed_recipe> 
+                <product_commod>c_uox</product_commod>
+                <tails_commod>waste</tails_commod>
+                <max_feed_inventory>30000000</max_feed_inventory>
+                <tails_assay>0.003</tails_assay>
+            </Enrichment>
+        </config>
+    </prototype>
+
+
 
     <prototype>
         <name>pwr</name>
@@ -79,8 +95,8 @@
                 <fuel_outcommods> 
                     <val>c_uox_spent</val>
                 </fuel_outcommods>
-                <cycle_time>25</cycle_time> <!-- BU/30days *Mcore/batch / P_eff = 50./(30)*88758./3./(3000*0.9) -->
-                <refuel_time>0</refuel_time>
+                <cycle_time>5</cycle_time> <!-- BU/30days *Mcore/batch / P_eff = 50./(30)*88758./3./(3000*0.9) -->
+                <refuel_time>3</refuel_time>
                 
                 <n_batch_core>3</n_batch_core>
                 <batch_size>30000</batch_size>
@@ -114,6 +130,7 @@
                 <prototypes>
                     <val>waste</val>
                     <val>nu_src</val>
+                    <val>enrichment</val>
                     <val>storage_uox_spent</val>
                     <val>pwr</val>
                 </prototypes>
@@ -123,9 +140,11 @@
                     <val>1</val>
                     <val>1</val>
                     <val>1</val>
+                    <val>1</val>
                 </build_times>
 
                 <n_build>
+                    <val>1</val>
                     <val>1</val>
                     <val>1</val>
                     <val>1</val>
