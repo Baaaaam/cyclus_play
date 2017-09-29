@@ -100,7 +100,7 @@
                 
                 <n_batch_core>3</n_batch_core>
                 <batch_size>30000</batch_size>
-                
+                <n_batch_fresh>2</n_batch_fresh> 
                 <power>3600</power>
                 <power_cap>3600</power_cap>
                 <burnup>30</burnup>
