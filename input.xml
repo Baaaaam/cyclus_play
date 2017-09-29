@@ -75,16 +75,10 @@
         <name>pwr</name>
         <lifetime>720</lifetime>
         <config>
-            <cyclassReactor>
-                <eq_model>MLP_Kinf</eq_model>
-                <eq_command>//Users/mouginot/work/app//CLASS/DATA_BASES/PWR/UOX/EQModel/MLP_KINF/PWR_UOX.xml,//Users/mouginot/work/app//CLASS/DATA_BASES/PWR/UOX/EQModel/MLP_KINF/PWR_UOX.nfo,3,1.034</eq_command>
-
-                <ir_model>RK4</ir_model>
-                <ir_command>none</ir_command>
-
-                <xs_model>XSM_MLP</xs_model>
-                <xs_command>//Users/mouginot/work/app//CLASS/DATA_BASES/PWR/UOX/XSModel/30Wg_FullUOX/,Data_Base_Info.nfo,false</xs_command>
-                <fuel_type>uox</fuel_type>
+            <Reactor>
+                <fuel_inrecipes>
+                    <val>PWR_UOX_new</val>
+                </fuel_inrecipes>
                 <fuel_incommods>
                     <val>c_uox</val>
                 </fuel_incommods>
@@ -92,22 +86,40 @@
                     <val>10</val>
                 </fuel_prefs>
 
+                <fuel_outrecipes> 
+                    <val>PWR_UOX_spent</val>
+                </fuel_outrecipes>
                 <fuel_outcommods> 
                     <val>c_uox_spent</val>
                 </fuel_outcommods>
-                <cycle_time>5</cycle_time> <!-- BU/30days *Mcore/batch / P_eff = 50./(30)*88758./3./(3000*0.9) -->
-                <refuel_time>3</refuel_time>
-                
-                <n_batch_core>3</n_batch_core>
-                <batch_size>30000</batch_size>
-                <n_batch_fresh>2</n_batch_fresh> 
-                <power>3600</power>
-                <power_cap>3600</power_cap>
-                <burnup>30</burnup>
-            </cyclassReactor>
+                <cycle_time>18</cycle_time> <!-- BU/30days *Mcore/batch / P_eff = 50./(30)*88758./3./(3000*0.9) -->
+                <refuel_time>0</refuel_time>
+                <assem_size>29586.0</assem_size><!-- Core_inv / Core_Ass = 88758 / 3. -->
+                <n_assem_core>3</n_assem_core>
+                <n_assem_batch>1</n_assem_batch>
+                <power_cap>1000</power_cap> <!-- P_th * Ef_th * Cap_fac = 3000*33.333%*0.9 -->
+
+            </Reactor>
         </config>
     </prototype>
 
+<!-- *********************** -->
+  <recipe>
+    <name>PWR_UOX_new</name>
+    <basis>mass</basis>
+    <nuclide><id>U238</id> <comp>0.9162</comp></nuclide>
+    <nuclide><id>U235</id><comp>0.0838</comp></nuclide>
+  </recipe>
+
+  <!-- *** spent *** -->
+  <recipe>
+    <name>PWR_UOX_spent</name>
+    <basis>mass</basis>
+    <nuclide><id>U238</id>  <comp>0.8851</comp></nuclide>
+    <nuclide><id>U235</id> <comp>0.0602</comp></nuclide>
+    <nuclide><id>Am241</id> <comp>0.0040</comp></nuclide>
+    <nuclide><id>Cs137</id> <comp>0.0507</comp> </nuclide>
+  </recipe>
     <prototype>
         <name>storage_uox_spent</name>
         <config>
