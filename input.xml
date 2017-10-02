@@ -3,7 +3,7 @@
     <schematype>flat</schematype>
     <control>
         <!--<duration>1800</duration>-->
-        <duration>100</duration>
+        <duration>1000</duration>
         <startmonth>1</startmonth>
         <startyear>0</startyear>
         <decay>lazy</decay>
@@ -65,6 +65,7 @@
                 <tails_commod>waste</tails_commod>
                 <max_feed_inventory>30000000</max_feed_inventory>
                 <tails_assay>0.003</tails_assay>
+                <tails_assay_uncertainty>0.001</tails_assay_uncertainty>
             </Enrichment>
         </config>
     </prototype>
