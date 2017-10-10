@@ -3,7 +3,7 @@
     <schematype>flat</schematype>
     <control>
         <!--<duration>1800</duration>-->
-        <duration>1000</duration>
+        <duration>500</duration>
         <startmonth>1</startmonth>
         <startyear>0</startyear>
         <decay>lazy</decay>
@@ -117,6 +117,7 @@
       <basis>mass</basis>
       <nuclide><id>U238</id>  <comp>0.8851</comp></nuclide>
       <nuclide><id>U235</id> <comp>0.0602</comp></nuclide>
+      <nuclide><id>Pu239</id> <comp>0.01</comp></nuclide>
       <nuclide><id>Am241</id> <comp>0.0040</comp></nuclide>
       <nuclide><id>Cs137</id> <comp>0.0507</comp> </nuclide>
   </recipe>
@@ -130,7 +131,8 @@
               <out_commods>
                   <val>c_uox_spent_stored</val>
               </out_commods>
-              <residence_time>0</residence_time>
+              <residence_time>60</residence_time>
+              <residence_time_uncertainty>10</residence_time_uncertainty>  
           </Storage>
       </config>
   </prototype>
@@ -170,7 +172,6 @@
                   </item>
               </streams>
               <leftover_commod>waste</leftover_commod>
-              <efficiency_uncertainty>0.1</efficiency_uncertainty>
           </Separations>
       </config>
   </prototype>
@@ -224,9 +225,15 @@
                   <val>1</val>
                   <val>1</val>
                   <val>1</val>
+                  <val>1</val>
+                  <val>1</val>
+                  <val>1</val>
               </build_times>
 
               <n_build>
+                  <val>1</val>
+                  <val>1</val>
+                  <val>1</val>
                   <val>1</val>
                   <val>1</val>
                   <val>1</val>
