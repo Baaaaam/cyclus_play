@@ -5,6 +5,7 @@
     <duration>12</duration>
     <startmonth>1</startmonth>
     <startyear>2000</startyear>
+    <explicit_inventory>true</explicit_inventory>
   </control>
 
   <archetypes>
@@ -40,6 +41,17 @@
       </Source>
     </config>
   </facility>
+  <facility>
+        <name>waste</name>
+        <config>
+            <Sink>
+                <in_commods><val>waste</val></in_commods>
+                <capacity>1e100</capacity>
+            </Sink>
+        </config>
+    </facility>
+
+
 
   <facility>
     <name>reactor</name>
@@ -71,6 +83,10 @@
     <institution>
       <name>SingleInstitution</name>
       <initialfacilitylist>
+        <entry>
+          <prototype>waste</prototype>
+          <number>1</number>
+        </entry>
         <entry>
           <prototype>SomeSource</prototype>
           <number>1</number>
