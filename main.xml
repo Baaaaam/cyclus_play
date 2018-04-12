@@ -2,7 +2,7 @@
 
     <schematype>flat</schematype>
     <control>
-        <duration>500</duration>
+        <duration>5000000</duration>
         <startmonth>1</startmonth>
         <startyear>2015</startyear>
         <decay>never</decay>
