@@ -1,0 +1,310 @@
+<simulation>
+  
+  <control>
+    <duration>600</duration>
+    <startmonth>1</startmonth>
+    <startyear>2000</startyear>
+    <decay>never</decay>
+  </control>
+
+  <archetypes>
+    <spec> <lib>agents</lib> <name>NullInst</name></spec>
+    <spec> <lib>agents</lib> <name>NullRegion</name></spec>
+    <spec> <lib>cycamore</lib> <name>Source</name></spec>
+    <spec> <lib>cycamore</lib> <name>Sink</name></spec>
+    <spec> <lib>cycamore</lib> <name>Separations</name> </spec>
+  </archetypes>
+
+   <recipe>
+     <name>OreRecipe</name>
+     <basis>mass</basis>
+     <nuclide> <id>U235</id> <comp>1</comp> </nuclide>
+     <nuclide> <id>U238</id> <comp>1</comp> </nuclide>
+     <nuclide> <id>Pu239</id> <comp>1</comp> </nuclide>
+   </recipe>
+
+   
+   <facility>
+     <name>Source1</name>
+     <config>
+       <Source>
+           <outcommod>Ore</outcommod>
+           <outrecipe>OreRecipe</outrecipe>
+           <throughput>1e100</throughput>
+           <inventory_size>1e100</inventory_size>
+       </Source>
+     </config>
+   </facility>
+ 
+   <facility>
+    <name>Separation1</name>
+    <config>
+      <Separations>
+          <feed_commods> 
+              <val>Ore</val> 
+              <val>spent_uox1</val> 
+          </feed_commods>
+          <feed_commod_prefs> 
+              <val>2.0</val> 
+              <val>20</val> 
+          </feed_commod_prefs>
+          <feedbuf_size>300</feedbuf_size>
+          
+          <streams>
+              <item>
+                  <commod>UraniumOre</commod>
+                  <info>
+                      <buf_size>10</buf_size>
+                      <efficiencies>
+                         <item><comp>U235</comp> <eff>1</eff></item>
+                         <item><comp>U238</comp> <eff>1</eff></item>
+                      </efficiencies>
+                  </info>
+              </item>
+              <item>
+                  <commod>AnOtherUraniumOre</commod>
+                  <info>
+                      <buf_size>1e100</buf_size>
+                      <efficiencies>
+                         <item><comp>U236</comp> <eff>1</eff></item>
+                      </efficiencies>
+                  </info>
+              </item>
+          </streams>
+
+          <leftover_commod>OreWaste</leftover_commod>
+
+          <throughput>100</throughput>
+
+      </Separations>
+    </config>
+  </facility>
+
+
+    <facility>
+    <name>PlutoniumSink</name>
+    <config>
+      <Sink>
+        <in_commods><val>OreWaste</val></in_commods>
+        <capacity>1e100</capacity>
+        <max_inv_size>1e100</max_inv_size>
+      </Sink>
+    </config>
+  </facility>
+
+   <facility>
+    <name>Separation2</name>
+    <config>
+      <Separations>
+          <feed_commods> 
+              <val>UraniumOre</val> 
+          </feed_commods>
+          <feed_commod_prefs> 
+              <val>2.0</val> 
+          </feed_commod_prefs>
+          <feedbuf_size>300</feedbuf_size>
+          
+          <streams>
+              <item>
+                  <commod>EnrichUranium</commod>
+                  <info>
+                      <buf_size>10</buf_size>
+                      <efficiencies>
+                         <item><comp>U235</comp> <eff>1</eff></item>
+                         <item><comp>U238</comp> <eff>0.5</eff></item>
+                      </efficiencies>
+                  </info>
+              </item>
+          </streams>
+
+          <leftover_commod>DepletedUranium</leftover_commod>
+
+          <throughput>100</throughput>
+
+      </Separations>
+    </config>
+  </facility>
+
+<facility>
+    <name>EnrichUSink</name>
+    <config>
+      <Sink>
+          <in_commods>
+              <val>EnrichUranium</val>
+          </in_commods>
+        <capacity>1e100</capacity>
+        <max_inv_size>1e100</max_inv_size>
+      </Sink>
+    </config>
+  </facility>
+  
+  <facility>
+    <name>DepletedUSink</name>
+    <config>
+      <Sink>
+          <in_commods>
+              <val>DepletedUranium</val>
+          </in_commods>
+        <capacity>1e100</capacity>
+        <max_inv_size>1e100</max_inv_size>
+      </Sink>
+    </config>
+  </facility>
+
+  <region>
+    <name>SingleRegion</name>
+    <config><NullRegion/></config>
+    <institution>
+      <name>SingleInstitution</name>
+      <initialfacilitylist>
+        <entry>
+          <prototype>Source1</prototype>
+          <number>1</number>
+        </entry>
+        <entry>
+          <prototype>Separation1</prototype>
+          <number>1</number>
+        </entry>
+        <entry>
+          <prototype>PlutoniumSink</prototype>
+          <number>1</number>
+        </entry>
+        <entry>
+          <prototype>Separation2</prototype>
+          <number>1</number>
+        </entry>
+        <entry>
+          <prototype>DepletedUSink</prototype>
+          <number>1</number>
+        </entry>
+        <entry>
+          <prototype>EnrichUSink</prototype>
+          <number>1</number>
+        </entry>
+      </initialfacilitylist>
+      <config><NullInst/></config>
+    </institution>
+  </region>
+
+</simulation>
+<!--
+duration -> number of tilmestep
+startmonth/startyear -> used only for cosmetic but required
+you can find some additional informations here: http://fuelcycle.org/user/input_specs/control.html
+
+
+
+(cycamore have additional achetypes available, you can find some documentations there: http://fuelcycle.org/user/index.html#archetypes)
+
+Source definition (more http://fuelcycle.org/user/cycamoreagents.html#cycamore-source):
+
+  <facility>
+    <name> MySourceName </name>
+    <config>
+      <Source>
+        <outcommod>OutComodity</outcommod>
+        <outrecipe>OutRecipe</outrecipe>
+        <throughput>1e100</throughput >
+        <max_inv_size>1e100</max_inv_size >
+      </Source>
+    </config>
+  </facility>
+
+to be changed:
+- MySourceName
+- OutComodity
+- OutRecipe (Need to be definited in the input file)
+- throughput  (amount that can be delivered per tilmestep)
+- max_inv_size value
+
+Recipe definition (more http://fuelcycle.org/user/input_specs/recipe.html):
+  <recipe>
+    <name>natl_u</name>
+    <basis>mass</basis>
+    <nuclide> <id>U235</id> <comp>0.711</comp> </nuclide>
+    <nuclide> <id>U238</id> <comp>99.289</comp> </nuclide>
+  </recipe>
+
+
+Sink definition (for additional documentation http://fuelcycle.org/user/cycamoreagents.html#cycamore-sink):
+  <facility>
+    <name>MySinkName</name>
+    <config>
+      <Sink>
+        <in_commods><val>SinkIncomeCommodity</val></in_commods>
+        <capacity>1e100</capacity>
+        <max_inv_size>1e100</max_inv_size >
+      </Sink>
+    </config>
+  </facility>
+
+to be changed: 
+- MySinkName
+- SinkIncomeCommodity
+- capacity value  (amount that can be delivered per tilmestep)
+- max_inv_size value
+
+
+
+
+Separation definition (see more http://fuelcycle.org/user/cycamoreagents.html#cycamore-separations):
+
+  <facility>
+    <name>MySeparationName</name>
+    <config>
+      <Separations>
+          <streams>
+              <item>
+                  <commod>MyCommodity1</commod>
+                  <info>
+                      <buf_size>1e100</buf_size>
+                      <efficiencies>
+                         <item><comp>Pu</comp> <eff>.99</eff></item>
+                      </efficiencies>
+                  </info>
+              </item>
+          </streams>
+
+          <leftover_commod>waste</leftover_commod>
+
+          <throughput>30001</throughput>
+          <feedbuf_size>30001</feedbuf_size>
+
+          <feed_commods> <val>spent_uox</val> </feed_commods>
+          <feed_commod_prefs> <val>2.0</val> </feed_commod_prefs>
+      </Separations>
+    </config>
+  </facility>
+
+you can have multiple item in streams sections, each of them corresponding to a specific separated stream:
+              <item>
+                  <commod>MyCommodity1</commod>
+                  <info>
+                      <buf_size>1e100</buf_size>
+                      <efficiencies>
+                         <item><comp>Pu</comp> <eff>.99</eff></item>
+                      </efficiencies>
+                  </info>
+              </item>
+in each item one need to define the corresponding out commodity, and the efficiency of separation for each element (ex 239Pu) of family of element (ex Pu so all the plutonium element).
+
+all the element that are not sent to a specific stream are put together and offered as the `leftover_commod` (here waste)
+each stream as a dedicated buffer size (local storage), that get filled by the separation and emptied when some material are sent to an other facility.
+
+There is also a buffer for the input material and the leftover material.
+
+
+Baptiste
+
+
+
+Baptiste Mouginot, PhD
+Assistant Scientist, Nuclear Engineering
+University of Wisconsin-Madison
+mouginot.baptiste@gmail.com
+
+
+-->
+
+
+
