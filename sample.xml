@@ -1,0 +1,98 @@
+<simulation>
+    <schematype>flat</schematype>
+    <control>
+        <duration>360</duration>
+        <startmonth>1</startmonth>
+        <startyear>1970</startyear>
+        <explicit_inventory>true</explicit_inventory>
+    </control>
+
+    <archetypes>
+        <spec> <lib>cycamore</lib> <name>DeployInst</name></spec>
+        <spec> <lib>cycamore</lib><name>Source</name> </spec>
+        <spec> <lib>cycamore</lib><name>Storage</name> </spec>
+    </archetypes>
+    
+    <prototype>
+        <name>deployer</name>
+        <config>
+            <DeployInst>
+                <prototypes>
+                    <val>src1</val>
+
+                    <val>src2</val>
+                    
+                    <val>str</val>
+                </prototypes>
+
+                <build_times>
+                    <val>1</val>
+
+                    <val>1</val>
+
+                    <val>1</val>
+                </build_times>
+
+                <n_build>
+                    <val>1</val>
+
+                    <val>1</val>
+
+                    <val>1</val>
+                </n_build>
+            </DeployInst>
+        </config>
+    </prototype>
+    
+    <agent> <name>deployer_</name> <prototype>deployer</prototype> </agent>
+
+    <recipe>
+        <name>r_1</name>
+        <basis>atom</basis>
+        <nuclide> <id>922380000</id> <comp>0.9929</comp> </nuclide>
+    </recipe>
+
+    <prototype>
+        <name>src1</name>
+        <config>
+            <Source>
+                <outcommod>c_src1</outcommod>
+                <outrecipe>r_1</outrecipe>
+                <throughput>10</throughput>
+            </Source>
+        </config>
+    </prototype>
+
+    <prototype>
+        <name>src2</name>
+        <config>
+            <Source>
+                <outcommod>c_src2</outcommod>
+                <outrecipe>r_1</outrecipe>
+                <throughput>10</throughput>
+            </Source>
+        </config>
+    </prototype>
+
+    <prototype>
+        <name>str</name>
+        <config>
+            <Storage>
+                <max_inv_size>10</max_inv_size>
+                <in_recipe>r_1</in_recipe>
+                <in_commods>
+                    <val>c_src1</val>
+                    <val>c_src2</val>
+                </in_commods>
+                <in_commod_prefs>
+                    <val>1</val>
+                    <val>1</val>
+                </in_commod_prefs>
+                <out_commods>
+                    <val>c_mil_uox</val>
+                </out_commods>
+                <residence_time>0</residence_time>
+            </Storage>
+        </config>
+    </prototype>
+</simulation>
