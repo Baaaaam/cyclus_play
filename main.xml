@@ -13,7 +13,6 @@
         <spec> <lib>cycamore</lib> <name>DeployInst</name></spec>
         <spec> <lib>cycamore</lib> <name>Sink</name></spec>
         <spec> <lib>cycamore</lib> <name>Reactor</name> </spec>
-        <spec> <lib>cycvt</lib> <name>SEnrichment</name> </spec>
     </archetypes>
 
 
@@ -22,36 +21,14 @@
         <name>u_nat</name>
         <config>
             <Source>
-                <outcommod>unat</outcommod>
-                <outrecipe>unat</outrecipe>
+                <outcommod>UOX</outcommod>
+                <outrecipe>UOX</outrecipe>
                 <inventory_size>1e100</inventory_size>
                 <throughput>1e100</throughput>
             </Source>
         </config>
     </prototype>
 
-    <prototype>
-        <name>enrich</name>
-        <config>
-            <SEnrichment>
-                <feed_commod>unat</feed_commod>
-                <feed_recipe>unat</feed_recipe>
-                <product_commod>UOX</product_commod>
-                <tails_commod>DU</tails_commod>
-                <tails_assay>0.0025</tails_assay>
-                <swu_capacity>1e100</swu_capacity>
-                <initial_feed>1e100</initial_feed>
-                                
-                <enrich_efficiencies>
-                    <item>
-                        <comp>U236</comp>
-                        <eff>0.44</eff>
-                    </item>
-                </enrich_efficiencies>
-                
-            </SEnrichment>
-        </config>
-    </prototype>
 
     <prototype>
         <name>LWR</name>
@@ -97,7 +74,6 @@
             <DeployInst>
                 <prototypes>
                     <val>u_nat</val>
-                    <val>enrich</val>
                     <val>sink</val>
                     <val>sink_du</val>
                     <val>LWR</val>
@@ -108,11 +84,9 @@
                     <val>1</val>
                     <val>1</val>
                     <val>1</val>
-                    <val>1</val>
                 </build_times>
 
                 <n_build>
-                    <val>1</val>
                     <val>1</val>
                     <val>1</val>
                     <val>1</val>
